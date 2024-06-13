@@ -1,13 +1,14 @@
-FROM node:14.17.0
+# frontend/Dockerfile
+FROM node:14.17.0-alpine
 
-# Set the Current Working Directory inside the container
 WORKDIR /app
 
-# Copy the build output to the /app directory
-COPY build/ /app/
+COPY package*.json ./
 
-# Expose port 3000 to the outside world
+RUN npm install
+
+COPY . .
+
 EXPOSE 3000
 
-# Command to run the app
-CMD ["npx", "serve", "-s", "/app"]
+CMD ["npm", "start"]
