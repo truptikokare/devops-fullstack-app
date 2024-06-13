@@ -1,13 +1,12 @@
-FROM golang:1.19
+# backend/Dockerfile
+FROM golang:1.19-alpine
 
-# Set the Current Working Directory inside the container
 WORKDIR /app
 
-# Copy the Go app binary into the container
-COPY main .
+COPY . .
 
-# Expose port 8080 to the outside world
-EXPOSE 8080
+RUN go mod tidy
 
-# Command to run the executable
+RUN go build -o main .
+
 CMD ["./main"]
